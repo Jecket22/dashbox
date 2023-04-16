@@ -12,7 +12,7 @@ I advise you to not use this for a public server until a **full** release comes 
 - php 8.0+ (tested on 8.1)
 - MySQL or MariaDB (tested on MariaDB 10.3.35)
 
-### Credits (futuristic)
+### Credits
 - Cvolton and Wylie for various code and some tips
 - GD Programming Discord and its GDDocs project
 - External libraries are also credited respectively in their files
