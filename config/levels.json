@@ -1,0 +1,16 @@
+{
+	"starCPReward": 1,
+	"featureCPReward": 1,
+	"epicCPReward": 2,
+	"dailyCPReward": 0,
+	"weeklyCPReward": 0,
+	"magicCPReward": 1,
+	"instantCPRecalculation": true,
+	"creatorBannedLevelsVisible": false,
+	"uploadRateLimit": "60 seconds",
+	"manualMagicSection": false,
+	"epicInHall": true,
+	"trendExpiry": "1 week",
+	"trendLikesRequirement": 3,
+	"autoUnlistReportsRequirement": 0
+}

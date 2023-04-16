@@ -1,0 +1,5 @@
+{
+    "enableCaching": true,
+    "cahceExpiry": "1 hour",
+    "whitelistEnabled": false
+}

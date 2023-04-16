@@ -1,0 +1,14 @@
+{
+	"globalCooldown": "2 minutes",
+	"passphrase": "",
+	"limitToIPs": false,
+	"allowedIPs": ["127.0.0.1"],
+	"results": {
+		"bans": true,
+		"deletedLevels": true,
+		"databaseCleanup": true
+	},
+	"displayCronResults": false,
+	"logCronResults": true,
+	"logsLocation": "logs/cron"
+}

@@ -1,0 +1,10 @@
+{
+    "levelReuploadLimit": 0,
+    "levelReuploadLimitExpiration": "3 days",
+    "rateLevelsFromMainGD": false,
+    "songReuploadLimit": 0,
+    "songReuploadLimitExpiration": "3 days",
+    "SoundCloudAPIKey": "",
+    "useSongMirror": false,
+    "songMirrorServer": ""
+}

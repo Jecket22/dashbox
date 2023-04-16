@@ -1,0 +1,15 @@
+{
+	"registerMethod": 0,
+	"verifyLevel": 0,
+	"verifyExpiry": 0,
+	"cacheSession": true,
+	"sessionExpiry": "1 hour",
+	"userNameBlacklist": [
+		"asshole",
+		"(c|k)(u|x)nt",
+        "[f4h]([a4uxi1lo]*)(((ck|kc)|[ck])+)([e3a4x]?)([rs]*)"
+    ],
+	"userNameWhitelist": [
+		"example"
+	]
+}
