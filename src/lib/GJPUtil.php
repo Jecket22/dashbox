@@ -29,9 +29,9 @@ class GJPUtil
 		$requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
 
 		require_once (__DIR__) . "/database.php";
-		$insertValues = array($accountID, $requireVerified);
-		$hashQuery = $db->prepare("SELECT password FROM accounts WHERE id = (?) AND verified >= (?)");
-		$hash = Utils::QuickFetch($hashQuery, "si", ...$insertValues);
+		$hashQuery = $db->prepare("SELECT password FROM accounts WHERE id = :accountID AND verified >= :requireVerified");
+		$hashQuery->execute(array( ':accountID' => $accountID, ':requireVerified' => $requireVerified ));
+		$hash = $hashQuery->fetchColumn();
 		if (empty($hash) || !password_verify($password, $hash))
 			return false;
 		

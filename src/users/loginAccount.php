@@ -16,9 +16,9 @@ if (!accountLib::isUsernameValid($userName))
 $requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
 
 require (__DIR__) . "/../lib/database.php";
-$insertValues = array($userName, $requireVerified);
-$hashQuery = $db->prepare("SELECT password, id FROM accounts WHERE userName = (?) AND verified >= (?)");
-$result = Utils::QuickFetch($hashQuery, "si", ...$insertValues);
+$hashQuery = $db->prepare("SELECT password, id FROM accounts WHERE userName = :userName AND verified >= :requireVerified");
+$hashQuery->execute(array(':userName' => $userName, ':requireVerified' => $requireVerified ));
+$result = $hashQuery->fetch();
 $hash = $result["password"];
 $id = $result["id"];
 

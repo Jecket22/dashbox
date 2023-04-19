@@ -31,15 +31,14 @@ if (!accountLib::isPasswordValid($password))
 require (__DIR__) . "/../lib/database.php";
 
 $takenValues = array($userName);
-$userCheck = $db->prepare("SELECT COUNT(*) FROM accounts WHERE userName = (?)");
-$isTaken = Utils::QuickFetch($userCheck, "s", ...$takenValues); // ["COUNT(*)"];
-if ($isTaken)
+$userCheck = $db->prepare("SELECT COUNT(*) FROM accounts WHERE userName = :userName");
+$userCheck->execute(array(':userName' => $userName));
+$isTaken = $userCheck->fetchColumn();
+if ($isTaken > 0)
 	exit(AccountError::$TakenUsername);
 
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-$insertValues = array($userName, $hashedPassword);
-$addAccount = $db->prepare("INSERT INTO accounts (`userName`, `password`) VALUES (?, ?)");
-$addAccount->bind_param("ss", ...$insertValues);
-$addAccount->execute();
+$addAccount = $db->prepare("INSERT INTO accounts (userName, password) VALUES (:userName, :hashedPassword)");
+$addAccount->execute(array( ':userName' => $userName, ':hashedPassword' => $hashedPassword ));
 
 exit(GenericResponse::$Success);

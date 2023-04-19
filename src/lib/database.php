@@ -1,6 +1,9 @@
 <?php
 require_once (__DIR__) . "/config.php";
 $info = Config::GetConfig("connection");
-$db = new mysqli($info["server"], $info["user"], $info["password"], $info["database"], $info["port"]);
-if ($db -> connect_errno)
-	exit("MySQLi Error: " . $db->connect_error);
+try {
+	$db = new PDO("mysql:host=" . $info["server"] .";port=" . $info["port"] .";dbname=" . $info["database"],$info["user"], $info["password"], array(PDO::ATTR_PERSISTENT => true));
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+	exit("Connection failed: " . $e->getMessage());
+}
