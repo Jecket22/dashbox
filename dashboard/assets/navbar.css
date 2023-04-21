@@ -1,0 +1,72 @@
+nav {
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+}
+nav a {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0px 7px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+nav a:hover {
+  background: #444;
+}
+nav span {
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+nav span span {
+  position: relative;
+  width: 210px;
+}
+nav span span.enabled button p[data-button=on] {
+  display: block;
+}
+nav span span.enabled button p[data-button=off] {
+  display: none;
+}
+nav span span:not(.enabled) button p[data-button=on] {
+  display: none;
+}
+nav span span:not(.enabled) button p[data-button=off] {
+  display: block;
+}
+nav span span:not(.enabled) div {
+  display: none;
+}
+nav span span button {
+  background: #333;
+  border: 0px;
+  width: 210px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+nav span span button:hover {
+  background: #444;
+}
+nav span span div {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  right: 0px;
+  background: #222;
+  width: 210px;
+}
+nav span span div a:hover {
+  background: #333;
+}/*# sourceMappingURL=navbar.css.map */

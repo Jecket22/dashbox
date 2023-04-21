@@ -1,31 +1,44 @@
-<!DOCTYPE html>
-<link rel="stylesheet" href="assets/primary.css">
-<ul>
-  <li><a href="#home">Home</a></li>
-  <li><a href="#status">Server Status</a></li>
-  <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">Statistics</a>
-    <div class="dropdown-content">
-      <a href="#levelstats">Levels</a>
-      <a href="#songlist">Songs</a>
-      <a href="#leaderboard">Leaderboard</a>
-      <a href="#packs">Packs/Gauntlets</a>
-      <a href="#modactions">Mod Actions</a> <!-- 1 -->
-    </div>
-  </li>
-  <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">Tools</a>
-    <div class="dropdown-content">
-      <a href="#accman">Account Management</a>
-      <a href="#levelman">Level Management</a>
-      <a href="#reup">Reupload Level/Songs</a>
-      <a href="#modtools">Moderation Tools</a> <!-- 1 -->
-      <a href="#adminpan">Configuration Panel</a> <!-- 2 -->
-    </div>
-  </li>
-  <!-- should be displayed if you haven't logged in -->
-  <li style="float:right"><a href="#login">Login</a></li>
-  <li style="float:right"><a href="#reg">Register</a></li>
-  <!-- otherwise show this (with the right info ofc) -->
-  <li style="float:right"><a href="#accman">Profile</a></li>
-</ul>
+<link rel="stylesheet" href="/dashboard/assets/navbar.css">
+<nav>
+  <span>
+    <a href="javascript:void(0)">Home</a>
+    <a href="javascript:void(0)">Server Status</a>
+    <span id="statistics">
+      <button>
+        <p>Statistics</p>
+        <p data-button="on">▼</p>
+        <p data-button="off">▶</p>
+      </button>
+      <div>
+        <a href="javascript:void(0)">Levels</a>
+        <a href="javascript:void(0)">Songs</a>
+        <a href="javascript:void(0)">Leaderboard</a>
+        <a href="javascript:void(0)">Packs and Gauntlets</a>
+        <a href="javascript:void(0)">Mod Actions</a>
+      </div>
+    </span>
+    <span id="tools">
+      <button>
+        <p>Tools</p>
+        <p data-button="on">▼</p>
+        <p data-button="off">▶</p>
+      </button>
+      <div>
+        <a href="javascript:void(0)">Account Management</a>
+        <a href="javascript:void(0)">Level Management</a>
+        <a href="javascript:void(0)">Reupload Level</a>
+        <a href="javascript:void(0)">Reupload Song</a>
+        <a href="javascript:void(0)">Map Packs</a>
+        <a href="javascript:void(0)">Gauntlets</a>
+        <a href="javascript:void(0)">Mod Panel</a>
+        <a href="javascript:void(0)">Config Panel</a>
+      </div>
+    </span>
+  </span>
+  <span>
+    <a href="javascript:void(0)">Login</a>
+    <a href="javascript:void(0)">Register</a>
+    <a href="javascript:void(0)">Profile</a>
+  </span>
+</nav>
+<script src="dashboard/assets/navbar.js"></script>
