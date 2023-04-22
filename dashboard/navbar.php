@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="/dashboard/assets/navbar.css">
-<script src="/dashboard/assets/navbar.min.js" defer></script>
 <?php // Setup
 require (__DIR__) . "/../src/lib/config.php";
 require (__DIR__) . "/../src/lib/database.php";
