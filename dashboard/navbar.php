@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="/dashboard/assets/navbar.css">
+<script src="/dashboard/assets/navbar.min.js" defer></script>
+<?php // Require
+require (__DIR__) . "/../src/lib/config.php";
+require (__DIR__) . "/../src/lib/database.php";
+?>
 <nav>
   <span>
     <a href="javascript:void(0)">Home</a>
@@ -36,9 +41,18 @@
     </span>
   </span>
   <span>
-    <a href="javascript:void(0)">Login</a>
-    <a href="javascript:void(0)">Register</a>
-    <a href="javascript:void(0)">Profile</a>
+    <?php // Logged In?
+    if (empty($_COOKIE['username']) || empty($_COOKIE['password']))
+      echo '<a href="/dashboard/login/">Login</a><a href="/dashboard/register/">Register</a>';
+    else {
+      $requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
+
+      $login = $db->prepare("SELECT password FROM accounts WHERE userName = :username AND verified >= :requireVerified");
+      $login->execute(array(':username' => $_COOKIE['username'], ':requireVerified' => $requireVerified));
+      if (!password_verify($_COOKIE['password'], $login->fetchColumn()))
+        echo '<a href="/dashboard/login/">Login</a><a href="/dashboard/register/">Register</a>';
+      else echo '<a href="/dashboard/profile/">Profile</a>';
+    }
+    ?>
   </span>
 </nav>
-<script src="dashboard/assets/navbar.js"></script>
