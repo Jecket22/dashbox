@@ -5,7 +5,7 @@ session_start();
 ?>
 <nav>
   <span>
-    <a href="javascript:void(0)">Home</a>
+    <a href="/dashboard/">Home</a>
     <a href="javascript:void(0)">Server Status</a>
     <span id="statistics">
       <button>
