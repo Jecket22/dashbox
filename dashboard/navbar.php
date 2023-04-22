@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="/dashboard/assets/navbar.css">
 <script src="/dashboard/assets/navbar.min.js" defer></script>
-<?php // Require
+<?php // Setup
 require (__DIR__) . "/../src/lib/config.php";
 require (__DIR__) . "/../src/lib/database.php";
+session_start();
 ?>
 <nav>
   <span>
@@ -42,16 +43,20 @@ require (__DIR__) . "/../src/lib/database.php";
   </span>
   <span>
     <?php // Logged In?
-    if (empty($_COOKIE['username']) || empty($_COOKIE['password']))
+    if (empty($_SESSION['password']))
       echo '<a href="/dashboard/login/">Login</a><a href="/dashboard/register/">Register</a>';
     else {
       $requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
 
-      $login = $db->prepare("SELECT password FROM accounts WHERE userName = :username AND verified >= :requireVerified");
-      $login->execute(array(':username' => $_COOKIE['username'], ':requireVerified' => $requireVerified));
-      if (!password_verify($_COOKIE['password'], $login->fetchColumn()))
+      $login = $db->prepare("SELECT password FROM accounts WHERE verified >= :requireVerified AND password = :password");
+      $login->execute(array(':requireVerified' => $requireVerified, ':password' => $_SESSION['password']));
+      $password = $login->fetchColumn();
+      if (empty($password))
         echo '<a href="/dashboard/login/">Login</a><a href="/dashboard/register/">Register</a>';
-      else echo '<a href="/dashboard/profile/">Profile</a>';
+      else {
+        echo '<a href="/dashboard/profile/">Profile</a>';
+        $_SESSION['password'] = $password;
+      }
     }
     ?>
   </span>
