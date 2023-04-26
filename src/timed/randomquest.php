@@ -9,13 +9,11 @@ $userID = (isset($_POST["uuid"])) ? $_POST["uuid"] : $_POST["accountID"]; // tha
 require (__DIR__) . "/../lib/database.php";
 
 $count = $db->query("SELECT COUNT(*) FROM quests");
-$count->execute();
 if ($count->fetchColumn() < 3)
 	exit("-1 | Not enough quests created");
 
 // needed for named keys
 $quests = $db->query("SELECT type, requirement, reward, name FROM quests ORDER BY RAND() LIMIT 3");
-$quests->execute();
 $quests = $quests->fetch();
 
 // it's unclear what the QuestID is supposed to be

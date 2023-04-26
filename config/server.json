@@ -1,4 +1,5 @@
 {
     "useExternalSaveDataServer": false,
-    "externalSaveDataServer": ""
+    "externalSaveDataServer": "",
+    "dailyQuests": 1
 }
