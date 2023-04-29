@@ -5,7 +5,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(15) NOT NULL,
@@ -17,16 +16,14 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   KEY `userName` (`userName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COMMENT='Some data upon registering is discarded';
 
-
-DROP TABLE IF EXISTS `levels`;
 CREATE TABLE IF NOT EXISTS `levels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `description` varchar(255) NOT NULL,
   `accountID` int(11) NOT NULL,
   `audioID` int(11) NOT NULL DEFAULT 0 COMMENT 'Vanilla sound track',
   `songID` int(11) NOT NULL DEFAULT 0,
-  `difficulty` text NOT NULL DEFAULT 'NA',
+  `difficulty` varchar(255) NOT NULL DEFAULT 'NA',
   `demonDiff` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if difficulty is Demon (10)',
   `length` tinyint(1) NOT NULL DEFAULT 0,
   `objects` tinyint(1) NOT NULL DEFAULT 0,
@@ -44,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `levels` (
   `inMagic` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if configured',
   `bonusCP` int(11) NOT NULL DEFAULT 0,
   `noCP` tinyint(1) NOT NULL DEFAULT 0,
-  `uploadDate` bigint(20) NOT NULL DEFAULT current_timestamp(),
+  `uploadDate` bigint(20) NOT NULL DEFAULT 0,
   `updateDate` bigint(20) NOT NULL DEFAULT 0,
   `rateDate` bigint(20) NOT NULL DEFAULT 0,
   `requestedStars` tinyint(1) NOT NULL DEFAULT 0,
@@ -56,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `levels` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Level data (the actual levels) is stored externally in /data';
 
-DROP TABLE IF EXISTS `quests`;
 CREATE TABLE IF NOT EXISTS `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
@@ -74,7 +70,6 @@ INSERT INTO `quests` (`id`, `name`, `requirement`, `reward`, `type`) VALUES
 (5, 'Could it be Money?', 1, 10, 2),
 (6, 'Star Catcher', 10, 50, 3);
 
-DROP TABLE IF EXISTS `userdata`;
 CREATE TABLE IF NOT EXISTS `userdata` (
   `id` int(11) NOT NULL,
   `stars` int(11) NOT NULL DEFAULT 0,
