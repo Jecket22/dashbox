@@ -87,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   KEY `creatorBanned` (`creatorBanned`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='This is not connected to the cloud save data';
 
-DROP TABLE IF EXISTS `dailyquests`;
 CREATE TABLE IF NOT EXISTS `dailyquests` (
   `id` int(11) NOT NULL COMMENT 'The order of the quests',
   `questID` int(11) NOT NULL COMMENT 'The ID of this specific quest',
