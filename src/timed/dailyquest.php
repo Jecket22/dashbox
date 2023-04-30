@@ -28,6 +28,7 @@ if ($time < strtotime("tomorrow 00:00:00")) {
     $quests->execute(array( ':first' => $dailyquests[0]['id'], ':second' => $dailyquests[1]['id'], ':third' => $dailyquests[2]['id']));
     $quests = $quests->fetchAll();
 };
+
 $questID = floor((time() - strtotime('2020-4-6')) / 28800);
 
 $q = array();

@@ -92,6 +92,20 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   KEY `creatorBanned` (`creatorBanned`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='This is not connected to the cloud save data';
 
+DROP TABLE IF EXISTS `dailyquests`;
+CREATE TABLE IF NOT EXISTS `dailyquests` (
+  `id` int(11) NOT NULL COMMENT 'The order of the quests',
+  `questID` int(11) NOT NULL COMMENT 'The ID of this specific quest',
+  `expire` timestamp NOT NULL DEFAULT NOW() COMMENT "The timestamp that the quest will expire. This should theoretically be the same for all quests, I just don't know where else to store it",
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Only used for daily quests, otherwise this is unused';
+
+/* This is absolutely required because otherwise quests will not update properly */
+INSERT INTO `dailyquests` (`id`, `questID`) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
