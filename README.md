@@ -1,4 +1,4 @@
-# dashbox
+# Dashbox
 A new\* GDPS source code, written for ease of use and packing a whole lot of new features, allowing anyone with little knowledge to do a lot with their GDPS in unique ways.
 
 *Please note that this is **__a__ GDPS core**, not **__the__ GDPS core**. I personally am not looking to compete with other GDPS cores or pity on such which lack features, functionality or are just written in a different programming language.  

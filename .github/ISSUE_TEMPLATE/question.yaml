@@ -1,0 +1,12 @@
+name: Question
+description: Have a question for the team? Ask it here!
+title: "[Question]: "
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: Ask away!
+      placeholder: Can you use Dashbox for X?
+    validations:
+      required: true
