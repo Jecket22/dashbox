@@ -2,5 +2,9 @@
     "name": "",
     "version": "2.1",
     "region": "",
-    "timezone": ""
+    "timezone": "",
+    "Windows": "",
+    "OSX": "",
+    "Android": "",
+    "iOS": ""
 }
