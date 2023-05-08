@@ -50,7 +50,7 @@ class Utils
 		return false;
 	}
 	
-	public function getIP() {
+	public static function getIP() {
 		if (isset($_SERVER['HTTP_CF_CONNECTING_IP']) && self::IsCloudFlareIP($_SERVER['REMOTE_ADDR'])) // CLOUDFLARE REVERSE PROXY SUPPORT
   			return $_SERVER['HTTP_CF_CONNECTING_IP'];
 		
