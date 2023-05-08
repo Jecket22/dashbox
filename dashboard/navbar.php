@@ -45,7 +45,7 @@ session_start();
     if (empty($_SESSION['password']))
       echo '<a href="/dashboard/login/">Log In</a><a href="/dashboard/register/">Sign Up</a>';
     else {
-      $requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
+      $requireVerified = Config::GetVariable('accounts', 'verifyLevel');
 
       $login = $db->prepare("SELECT password FROM accounts WHERE verified >= :requireVerified AND password = :password");
       $login->execute(array(':requireVerified' => $requireVerified, ':password' => $_SESSION['password']));

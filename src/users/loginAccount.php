@@ -13,7 +13,7 @@ require (__DIR__) . "/accountLib.php";
 if (!accountLib::isUsernameValid($userName))
 	exit(AccountError::$InvalidUsername);
 
-$requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
+$requireVerified = Config::GetVariable('accounts', 'verifyLevel');
 
 require (__DIR__) . "/../lib/database.php";
 $hashQuery = $db->prepare("SELECT password, id FROM accounts WHERE userName = :userName AND verified >= :requireVerified");

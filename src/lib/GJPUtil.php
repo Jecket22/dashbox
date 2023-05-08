@@ -26,7 +26,7 @@ class GJPUtil
 			$password = self::decodeGJP($gjp);
 		
 		require_once (__DIR__) . "/config.php";
-		$requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
+		$requireVerified = Config::GetVariable('accounts', 'verifyLevel');
 
 		require_once (__DIR__) . "/database.php";
 		$hashQuery = $db->prepare("SELECT password FROM accounts WHERE id = :accountID AND verified >= :requireVerified");

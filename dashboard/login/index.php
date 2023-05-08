@@ -18,20 +18,19 @@
         <p>
             <?php // Check Credentials
             if (!empty($_POST['username']) || !empty($_POST['password'])) {
-                $requireVerified = strval((Config::GetVariable("accounts", "verifyLevel") != 0) ? 1 : 0);
+                $login = $db->prepare("SELECT password, verified FROM accounts WHERE username = :username");
+                $login->execute(array(':username' => $_POST['username']));
+                $login = $login->fetch();
 
-                $login = $db->prepare("SELECT password FROM accounts WHERE username = :username AND verified >= :requireVerified");
-                $login->execute(array(':username' => $_POST['username'], ':requireVerified' => $requireVerified));
-                $password = $login->fetchColumn();
-
-                if (empty($password)) echo 'Username or Password Incorrect';
+                if (!password_verify($_POST['password'], $login['password'])) echo 'Username or Password Incorrect';
                 else {
-                    if (!password_verify($_POST['password'], $password)) echo 'Username or Password Incorrect';
+                    if ($login['verified'] < Config::GetVariable('accounts', 'verifyLevel')) echo 'Account not Verified';
                     else {
                         $_SESSION['password'] = $password;
                         header('Location: /dashboard/');
                         exit;
                     }
+
                 }
             }
             ?>
