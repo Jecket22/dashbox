@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `quests` (
   `name` text NOT NULL,
   `requirement` int(11) NOT NULL COMMENT 'How much of type x to collect',
   `reward` int(11) NOT NULL COMMENT 'How many diamonds rewarded',
-  `type` int(11) NOT NULL COMMENT '1=orbs, 2=coins, 3=stars',
+  `type` int(11) NOT NULL COMMENT '1 - orbs, 2 - coins, 3 - stars',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='At least 3 quests should be saved to allow quests to appear properly';
 
