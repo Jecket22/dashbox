@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `explosion` int(11) NOT NULL DEFAULT 0,
   `trail` int(11) NOT NULL DEFAULT 0,
   `colour1` int(11) NOT NULL DEFAULT 0,
-  `colour2` int(11) NOT NULL DEFAULT 0,
+  `colour2` int(11) NOT NULL DEFAULT 3,
 
   `messages` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Only Friends, 2 - Nobody',
   `friendRequests` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 2 - Nobody',
