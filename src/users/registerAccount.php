@@ -1,5 +1,4 @@
 <?php
-$_POST = $_GET;
 require (__DIR__) . "/../lib/constants.php";
 require (__DIR__) . "/../lib/utils.php";
 
