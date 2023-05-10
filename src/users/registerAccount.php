@@ -1,4 +1,5 @@
 <?php
+$_POST = $_GET;
 require (__DIR__) . "/../lib/constants.php";
 require (__DIR__) . "/../lib/utils.php";
 
@@ -40,5 +41,12 @@ if ($isTaken > 0)
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 $addAccount = $db->prepare("INSERT INTO accounts (userName, password) VALUES (:userName, :hashedPassword)");
 $addAccount->execute(array( ':userName' => $userName, ':hashedPassword' => $hashedPassword ));
+
+$account = $db->prepare("SELECT id FROM accounts WHERE userName = :userName");
+$account->execute([':userName' => $userName]);
+$accountid = $account->fetchColumn();
+
+$addData = $db->prepare("INSERT INTO userdata (id, IP, creation) VALUES (:id, :IP, :creation)");
+$addData->execute([':id' => $accountid, ':IP' => Utils::getIP(), ':creation' => time()]);
 
 exit(GenericResponse::$Success);
