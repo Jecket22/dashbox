@@ -42,6 +42,7 @@ session_start();
   </span>
   <span>
     <?php // Logged In?
+    $alreadyLoggedIn = false;
     if (empty($_SESSION['password']))
       echo '<a href="/dashboard/login/">Log In</a><a href="/dashboard/register/">Sign Up</a>';
     else {
@@ -55,6 +56,7 @@ session_start();
       else {
         echo '<a href="/dashboard/profile/">Profile</a>';
         $_SESSION['password'] = $password;
+        $alreadyLoggedIn = true;
       }
     }
     ?>

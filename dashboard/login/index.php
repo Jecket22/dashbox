@@ -13,11 +13,17 @@
 
 <body>
     <?php include (__DIR__) . "/../navbar.php" ?>
+    <?php // Already logged in?
+        if ($alreadyLoggedIn) {
+            header('Location: /dashboard/');
+            exit;
+        }
+    ?>
     <div id="login">
         <h1>Log In</h1>
         <p>
             <?php // Check Credentials
-            if (!empty($_POST['username']) || !empty($_POST['password'])) {
+            if (isset($_POST['username']) || isset($_POST['password'])) {
                 $login = $db->prepare("SELECT password, verified FROM accounts WHERE username = :username");
                 $login->execute(array(':username' => $_POST['username']));
                 $login = $login->fetch();
@@ -26,7 +32,7 @@
                 else {
                     if ($login['verified'] < Config::GetVariable('accounts', 'verifyLevel')) echo 'Account not Verified';
                     else {
-                        $_SESSION['password'] = $password;
+                        $_SESSION['password'] = $login['password'];
                         header('Location: /dashboard/');
                         exit;
                     }

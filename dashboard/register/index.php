@@ -13,6 +13,12 @@
 
 <body>
     <?php include (__DIR__) . "/../navbar.php" ?>
+    <?php // Already logged in?
+    if ($alreadyLoggedIn) {
+        header('Location: /dashboard/');
+        exit;
+    }
+    ?>
     <div id="login">
         <h1>Sign Up</h1>
         <p>
@@ -41,7 +47,7 @@
             <input type="text" placeholder="Username" name="username" required />
             <input type="password" placeholder="Password" name="password" required />
             <input type="password" placeholder="Confirm Password" name="repeatpassword" required />
-            <input type="submit" value="Sign Up"/>
+            <input type="submit" value="Sign Up" />
         </form>
     </div>
 </body>
