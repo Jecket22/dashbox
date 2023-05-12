@@ -140,6 +140,190 @@ INSERT INTO `dailyquests` (`id`, `questID`) VALUES
 (2, 2),
 (3, 3);
 
+CREATE TABLE IF NOT EXISTS `friendrequests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender` int(11) NOT NULL DEFAULT 0,
+  `recipient` int(11) NOT NULL DEFAULT 0,
+  `comment` varchar(255) NOT NULL DEFAULT '',
+  `date` int(12) NOT NULL DEFAULT NOW(),
+  `new` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='All friend requests between users';
+
+CREATE TABLE IF NOT EXISTS `friends` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL DEFAULT 0,
+  `friend` int(11) NOT NULL DEFAULT 0,
+  `new` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender` int(11) NOT NULL DEFAULT 0,
+  `recipient` int(11) NOT NULL DEFAULT 0,
+  `date` int(12) NOT NULL DEFAULT NOW(),
+  `body` varchar(255) NOT NULL DEFAULT '',
+  `subject` varchar(255) NOT NULL DEFAULT '',
+  `new` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+
+  `name` varchar(255) NOT NULL UNIQUE COMMENT "The Name of the Role",
+
+  `rate` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Star Rating",
+  `feature` tinyint(1) NOT NULL DEFAULT 0,
+  `epic` tinyint(1) NOT NULL DEFAULT 0,
+
+  `unrate` tinyint(1) NOT NULL DEFAULT 0,
+
+  `verifyCoins` tinyint(1) NOT NULL DEFAULT 0,
+
+  `daily` tinyint(1) NOT NULL DEFAULT 0,
+  `weekly` tinyint(1) NOT NULL DEFAULT 0,
+
+  `deleteLevel` tinyint(1) NOT NULL DEFAULT 0,
+  `renameLevel` tinyint(1) NOT NULL DEFAULT 0,
+  `changePass` tinyint(1) NOT NULL DEFAULT 0,
+  `changeDescription` tinyint(1) NOT NULL DEFAULT 0,
+  `changeSong` tinyint(1) NOT NULL DEFAULT 0,
+  `deleteComment` tinyint(1) NOT NULL DEFAULT 0,
+
+  `makePublic` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Un-unlist a level",
+  `makeUnlisted` tinyint(1) NOT NULL DEFAULT 0,
+  
+  `suggestRating` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Add a Rating to the Suggest List",
+
+  `requestMod` tinyint(1) NOT NULL DEFAULT 0,
+  `leaderboardBan` tinyint(1) NOT NULL DEFAULT 0,
+  `createMapPack` tinyint(1) NOT NULL DEFAULT 0,
+  `createQuest` tinyint(1) NOT NULL DEFAULT 0,
+
+  `modPanel` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Access to the Dashboard Mod Panel",
+
+  `commentColourR` int(11) NOT NULL DEFAULT 255 COMMENT "Red value of the comment colour",
+  `commentColourG` int(11) NOT NULL DEFAULT 255 COMMENT "Green value of the comment colour",
+  `commentColourB` int(11) NOT NULL DEFAULT 255 COMMENT "Blue value of the comment colour",
+  `modBadge` tinyint(1) NOT NULL DEFAULT 0 COMMENT "0 - None, 1 - Mod, 2 - Elder Mod",
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `roles` (
+  `name`,
+  `rate`,
+  `feature`,
+  `epic`,
+  `unrate`,
+  `verifyCoins`,
+  `daily`,
+  `weekly`,
+  `deleteLevel`,
+  `renameLevel`,
+  `changePass`,
+  `changeDescription`,
+  `changeSong`,
+  `deleteComment`,
+  `makePublic`,
+  `makeUnlisted`,
+  `suggestRating`,
+  `requestMod`,
+  `leaderboardBan`,
+  `createMapPack`,
+  `createQuest`,
+  `modPanel`,
+  `commentColourR`,
+  `commentColourG`,
+  `commentColourB`,
+  `modBadge`
+) VALUES
+(
+  'Mod',
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  1,
+  0,
+  1,
+  1,
+  1,
+  0,
+  0,
+  1,
+  1,
+  1,
+  0,
+  0,
+  1,
+  200,
+  255,
+  200,
+  1
+),
+(
+  'Elder Mod',
+  1,
+  1,
+  0,
+  1,
+  1,
+  0,
+  0,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  0,
+  0,
+  1,
+  1,
+  1,
+  0,
+  0,
+  1,
+  75,
+  255,
+  75,
+  2
+),
+(
+  'Owner',
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  50,
+  255,
+  255,
+  2
+);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
