@@ -14,7 +14,7 @@
 #login p {
   margin: 5px 0px;
   text-align: center;
-  height: 24px;
+  min-height: 24px;
   color: #888;
 }
 #login form {

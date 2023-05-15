@@ -1,5 +1,4 @@
 <?php
-// if (isset($_GET)) $_POST = $_GET;
 require (__DIR__) . "/../lib/constants.php";
 require (__DIR__) . "/../lib/config.php";
 require (__DIR__) . "/../lib/utils.php";
@@ -46,10 +45,13 @@ $incomingFriend = $db->prepare("SELECT count(*) FROM friendrequests WHERE sender
 $incomingFriend->execute([':sender' => $_POST['targetAccountID'], ':recipient' => $_POST['accountID']]);
 if ($incomingFriend->fetchColumn() > 0) $friendStatus = 4;
 
-if ($user['stars'] < 0) $rank = 0;
+if ($user['stars'] <= 0) $rank = 0;
 
-//these are all temp values before i get everything in place
-$mod = 0;
+$modBadge = $db->prepare("SELECT modBadge FROM roles WHERE id = :id");
+$modBadge->execute([':id' => $user['role']]);
+$modBadge = $modBadge->fetchColumn();
+if ($user['role'] <= 0) $modLevel = 0;
+else $modLevel = $modBadge;
 
 $verified = $user['verified'];
 if (Config::GetVariable('accounts', 'verifyLevel') == 0) $verified = 1;
@@ -82,7 +84,7 @@ echo ':16:' . $user['id'];
 echo ':31:' . $friendStatus;
 echo ':44:' . $user['twitter'];
 echo ':45:' . $user['twitch'];
-echo ':49:' . $mod;
+echo ':49:' . $modLevel;
 if ($_POST['accountID'] == $_POST['targetAccountID']) echo ':38:' . $newMessages;
 if ($_POST['accountID'] == $_POST['targetAccountID']) echo ':39:' . $friendRequests;
 if ($_POST['accountID'] == $_POST['targetAccountID']) echo ':40:' . $newFriends;

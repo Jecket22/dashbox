@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(15) NOT NULL,
   `password` binary(60) NOT NULL,
-  `verified` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Ignored if VerifyLevel config is set to 0',
-  `disabled` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Not 1 if an IP is temp-blocked',
+  `verified` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Ignored if VerifyLevel Config is Set to 0',
+  `disabled` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Not 1 if an IP is Temp-Blocked',
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `userName` (`userName`)
@@ -24,24 +24,24 @@ CREATE TABLE IF NOT EXISTS `levels` (
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `accountID` int(11) NOT NULL,
-  `audioID` int(11) NOT NULL DEFAULT 0 COMMENT 'Vanilla sound track',
+  `audioID` int(11) NOT NULL DEFAULT 0 COMMENT 'Vanilla Sound Track',
   `songID` int(11) NOT NULL DEFAULT 0,
   `difficulty` varchar(255) NOT NULL DEFAULT 'NA',
-  `demonDiff` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if difficulty is Demon (10)',
+  `demonDiff` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only Used if Difficulty is Demon (10)',
   `length` tinyint(1) NOT NULL DEFAULT 0,
   `objects` tinyint(1) NOT NULL DEFAULT 0,
   `coins` tinyint(1) NOT NULL DEFAULT 0,
   `originalID` int(11) NOT NULL DEFAULT 0,
-  `originalReuploadID` int(11) DEFAULT NULL COMMENT 'For the level reupload tool',
+  `originalReuploadID` int(11) DEFAULT NULL COMMENT 'For the Level Reupload Tool',
   `extraString` varchar(255) DEFAULT NULL,
   `downloads` int(11) NOT NULL DEFAULT 0,
   `likes` int(11) NOT NULL DEFAULT 0,
-  `featureScoring` int(11) NOT NULL DEFAULT 0 COMMENT 'Prioritized ordering over uploadDate for featured tab',
+  `featureScoring` int(11) NOT NULL DEFAULT 0 COMMENT 'Prioritized Ordering over uploadDate for Featured Tab',
   `stars` int(11) NOT NULL DEFAULT 0,
   `featured` tinyint(1) NOT NULL DEFAULT 0,
   `epic` tinyint(1) NOT NULL DEFAULT 0,
-  `inHall` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if configured',
-  `inMagic` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if configured',
+  `inHall` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only Used if Cconfigured',
+  `inMagic` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only Used if Configured',
   `bonusCP` int(11) NOT NULL DEFAULT 0,
   `noCP` tinyint(1) NOT NULL DEFAULT 0,
   `uploadDate` bigint(20) NOT NULL DEFAULT 0,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `levels` (
   `unlisted` tinyint(1) NOT NULL DEFAULT 0,
   `version` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Level data (the actual levels) is stored externally in /data';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Level Data is Stored Externally in /data';
 
 CREATE TABLE IF NOT EXISTS `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `quests` (
   `reward` int(11) NOT NULL COMMENT 'How many diamonds rewarded',
   `type` int(11) NOT NULL COMMENT '1 - orbs, 2 - coins, 3 - stars',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='At least 3 quests should be saved to allow quests to appear properly';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='At Least 3 Quests Should be Saved to Allow Quests to Appear Properly';
 
 INSERT INTO `quests` (`id`, `name`, `requirement`, `reward`, `type`) VALUES
 (1, 'Pool of Orbs', 100, 10, 1),
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `IP` varchar(45) NOT NULL DEFAULT '127.0.0.1',
   `friends` int(11) NOT NULL DEFAULT 0,
 
-  `mainIcon` int(11) NOT NULL DEFAULT 0 COMMENT 'Determines the icon used for displaying in comments, leaderboard, etc.',
+  `mainIcon` int(11) NOT NULL DEFAULT 0 COMMENT 'Determines the Icon used for Displaying in Comments, Leaderboard, etc.',
   `player` int(11) NOT NULL DEFAULT 0 COMMENT '0',
   `ship` int(11) NOT NULL DEFAULT 0 COMMENT '1',
   `ball` int(11) NOT NULL DEFAULT 0 COMMENT '2',
@@ -113,13 +113,15 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `creation` int(11) NOT NULL DEFAULT 0 COMMENT 'Account creation date',
   `lastLogOn` int(11) NOT NULL DEFAULT 0,
 
-  `leaderboardBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Not checked if acc is disabled',
-  `creatorBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'leaderboardBanned will affect this',
+  `leaderboardBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Not Checked if Acc is Disabled',
+  `creatorBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'leaderboardBanned Affects This',
 
   `chest1` int(11) NOT NULL DEFAULT 0 COMMENT 'Timestamp',
   `chest2` int(11) NOT NULL DEFAULT 0 COMMENT 'Timestamp',
   `chestCount1` int(11) NOT NULL DEFAULT 0 COMMENT 'In-game chest ID',
   `chestCount2` int(11) NOT NULL DEFAULT 0 COMMENT 'In-game chest ID',
+
+  `role` int(11) NOT NULL DEFAULT 0 COMMENT '0 - Base User, Other - Role Listed in "roles" Table',
 
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
@@ -130,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
 CREATE TABLE IF NOT EXISTS `dailyquests` (
   `id` int(11) NOT NULL,
   `questID` int(11) NOT NULL,
-  `expire` timestamp NOT NULL DEFAULT NOW() COMMENT "The timestamp that the quest will expire. This should theoretically be the same for all quests, I just don't know where else to store it",
+  `expire` int(11) NOT NULL DEFAULT NOW() COMMENT "The timestamp that the quest will expire. This should theoretically be the same for all quests, I just don't know where else to store it",
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Only used for daily quests, otherwise this is unused';
 

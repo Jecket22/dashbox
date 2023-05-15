@@ -26,9 +26,10 @@
             if (isset($_POST['username']) || isset($_POST['password'])) {
                 $login = $db->prepare("SELECT password, verified FROM accounts WHERE username = :username");
                 $login->execute(array(':username' => $_POST['username']));
-                $login = $login->fetch();
+                $login = $login->fetchAll();
 
-                if (!password_verify($_POST['password'], $login['password'])) echo 'Username or Password Incorrect';
+                if (empty($login)) echo 'Username or Password Incorrect';
+                else if (!password_verify($_POST['password'], $login['password'])) echo 'Username or Password Incorrect';
                 else {
                     if ($login['verified'] < Config::GetVariable('accounts', 'verifyLevel')) echo 'Account not Verified';
                     else {

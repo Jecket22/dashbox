@@ -10,7 +10,7 @@ require (__DIR__) . "/../lib/database.php";
 $dailyquests = $db->query("SELECT * FROM dailyquests");
 $dailyquests = $dailyquests->fetchAll();
 
-$time = strtotime($dailyquests[0]['expire']);
+$time = $dailyquests[0]['expire'];
 
 if ($time < strtotime("tomorrow 00:00:00")) {
     $time = strtotime("tomorrow 00:00:00");

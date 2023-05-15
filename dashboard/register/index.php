@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include (__DIR__) . "/../navbar.php" ?>
+    <?php include (__DIR__) . "/../navbar.php"; require (__DIR__) . "/../../src/lib/utils.php"; ?>
     <?php // Already logged in?
     if ($alreadyLoggedIn) {
         header('Location: /dashboard/');
@@ -34,6 +34,13 @@
 
                         $register = $db->prepare("INSERT INTO accounts (userName, password) VALUES (:username, :password)");
                         $register->execute(array(':username' => $_POST['username'], ':password' => $password));
+
+                        $accountID = $db->prepare("SELECT id FROM accounts WHERE userName = :userName");
+                        $accountID->execute([':userName' => $_POST['username']]);
+                        $accountID = $accountID->fetchColumn();
+
+                        $addData = $db->prepare("INSERT INTO userdata (id, IP, creation) VALUES (:id, :IP, :creation)");
+                        $addData->execute([':id' => $accountID, ':IP' => Utils::getIP(), ':creation' => time()]);
 
                         $_SESSION['password'] = $password;
                         header('Location: /dashboard/');
