@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `colour2` int(11) NOT NULL DEFAULT 3,
 
   `messages` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Only Friends, 2 - Nobody',
-  `friendRequests` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 2 - Nobody',
+  `friendRequests` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Nobody',
   `comments` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Only Friends, 2 - Nobody',
 
   `youtube` varchar(255) NOT NULL DEFAULT '',
@@ -168,6 +168,13 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `body` varchar(255) NOT NULL DEFAULT '',
   `subject` varchar(255) NOT NULL DEFAULT '',
   `new` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `blocks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `blocked` int(11) NOT NULL DEFAULT 0,
+  `blockee` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
