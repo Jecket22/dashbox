@@ -4,16 +4,17 @@ if (empty($_POST["chk"]) || empty($_POST["udid"]) || $_POST["secret"] != Secrets
     exit(GenericResponse::$Error);
 
 $userID = (isset($_POST["uuid"])) ? $_POST["uuid"] : $_POST["accountID"];
+if ($userID == 0) $userID = 1;
 
 require (__DIR__) . "/../lib/database.php";
 
 $dailyquests = $db->query("SELECT * FROM dailyquests");
 $dailyquests = $dailyquests->fetchAll();
 
-$time = $dailyquests[0]['expire'];
+$time = strtotime($dailyquests[0]['expire']);
 
 if ($time < strtotime("tomorrow 00:00:00")) {
-    $time = strtotime("tomorrow 00:00:00");
+    $time = strtotime("tomorrow 00:00:00") - time();
     $quests = $db->query("SELECT id, type, requirement, reward, name FROM quests ORDER BY RAND() LIMIT 3");
     $quests = $quests->fetchAll();
 

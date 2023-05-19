@@ -5,6 +5,10 @@ if (empty($_POST["chk"]) || empty($_POST["udid"]) || $_POST["secret"] != Secrets
 	exit(GenericResponse::$Error);
 
 $userID = (isset($_POST["uuid"])) ? $_POST["uuid"] : $_POST["accountID"]; // thank you robtop.
+// if for whatever reason $userID is 0, it then prevents quests from loading.
+// setting that to 1 fixes it, despite it not matching it with the actual uuid/accountID. why
+// I really hope this issue only applies to non-registered users
+if ($userID == 0) $userID = 1; 
 
 require (__DIR__) . "/../lib/database.php";
 
@@ -14,7 +18,7 @@ if ($count->fetchColumn() < 3)
 
 // needed for named keys
 $quests = $db->query("SELECT type, requirement, reward, name FROM quests ORDER BY RAND() LIMIT 3");
-$quests = $quests->fetch();
+$quests = $quests->fetchAll();
 
 // it's unclear what the QuestID is supposed to be
 // the docs says it's the amount of quests completed (with a questionmark left afterwards)
