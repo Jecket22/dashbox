@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(15) NOT NULL,
   `password` binary(60) NOT NULL,
-  `verified` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Ignored if VerifyLevel Config is Set to 0',
+  `verified` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Ignored if VerifyLevel Config is set to 0',
   `disabled` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Not 1 if an IP is Temp-Blocked',
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `levels` (
   `audioID` int(11) NOT NULL DEFAULT 0 COMMENT 'Vanilla Sound Track',
   `songID` int(11) NOT NULL DEFAULT 0,
   `difficulty` varchar(255) NOT NULL DEFAULT 'NA',
-  `demonDiff` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only Used if Difficulty is Demon (10)',
+  `demonDiff` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if difficulty is Demon (10)',
   `length` tinyint(1) NOT NULL DEFAULT 0,
   `objects` tinyint(1) NOT NULL DEFAULT 0,
   `coins` tinyint(1) NOT NULL DEFAULT 0,
@@ -36,12 +36,12 @@ CREATE TABLE IF NOT EXISTS `levels` (
   `extraString` varchar(255) DEFAULT NULL,
   `downloads` int(11) NOT NULL DEFAULT 0,
   `likes` int(11) NOT NULL DEFAULT 0,
-  `featureScoring` int(11) NOT NULL DEFAULT 0 COMMENT 'Prioritized Ordering over uploadDate for Featured Tab',
+  `featureScoring` int(11) NOT NULL DEFAULT 0 COMMENT 'Prioritized ordering over uploadDate for Featured Tab',
   `stars` int(11) NOT NULL DEFAULT 0,
   `featured` tinyint(1) NOT NULL DEFAULT 0,
   `epic` tinyint(1) NOT NULL DEFAULT 0,
-  `inHall` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only Used if Cconfigured',
-  `inMagic` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only Used if Configured',
+  `inHall` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if configured',
+  `inMagic` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Only used if configured',
   `bonusCP` int(11) NOT NULL DEFAULT 0,
   `noCP` tinyint(1) NOT NULL DEFAULT 0,
   `uploadDate` bigint(20) NOT NULL DEFAULT 0,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `levels` (
   `unlisted` tinyint(1) NOT NULL DEFAULT 0,
   `version` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Level Data is Stored Externally in /data';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Level Data is stored externally in /data';
 
 CREATE TABLE IF NOT EXISTS `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `quests` (
   `reward` int(11) NOT NULL COMMENT 'How many diamonds rewarded',
   `type` int(11) NOT NULL COMMENT '1 - orbs, 2 - coins, 3 - stars',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='At Least 3 Quests Should be Saved to Allow Quests to Appear Properly';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='Requires at least 3 Quests for those to display properly';
 
 INSERT INTO `quests` (`id`, `name`, `requirement`, `reward`, `type`) VALUES
 (1, 'Pool of Orbs', 100, 10, 1),
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `IP` varchar(45) NOT NULL DEFAULT '127.0.0.1',
   `friends` int(11) NOT NULL DEFAULT 0,
 
-  `mainIcon` int(11) NOT NULL DEFAULT 0 COMMENT 'Determines the Icon used for Displaying in Comments, Leaderboard, etc.',
+  `mainIcon` int(11) NOT NULL DEFAULT 0 COMMENT 'Determines the Icon used for displaying in Comments, Leaderboards, etc.',
   `player` int(11) NOT NULL DEFAULT 0 COMMENT '0',
   `ship` int(11) NOT NULL DEFAULT 0 COMMENT '1',
   `ball` int(11) NOT NULL DEFAULT 0 COMMENT '2',
@@ -99,8 +99,8 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `glow` int(11) NOT NULL DEFAULT 0,
   `explosion` int(11) NOT NULL DEFAULT 0,
   `trail` int(11) NOT NULL DEFAULT 0,
-  `colour1` int(11) NOT NULL DEFAULT 0,
-  `colour2` int(11) NOT NULL DEFAULT 3,
+  `color1` int(11) NOT NULL DEFAULT 0,
+  `color2` int(11) NOT NULL DEFAULT 3,
 
   `messages` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Only Friends, 2 - Nobody',
   `friendRequests` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Nobody',
@@ -113,8 +113,8 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `creation` int(11) NOT NULL DEFAULT 0 COMMENT 'Account creation date',
   `lastLogOn` int(11) NOT NULL DEFAULT 0,
 
-  `leaderboardBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Not Checked if Acc is Disabled',
-  `creatorBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'leaderboardBanned Affects This',
+  `leaderboardBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Not checked if the Account is disabled',
+  `creatorBanned` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'leaderboardBanned affects this',
 
   `chest1` int(11) NOT NULL DEFAULT 0 COMMENT 'Timestamp',
   `chest2` int(11) NOT NULL DEFAULT 0 COMMENT 'Timestamp',
@@ -132,11 +132,12 @@ CREATE TABLE IF NOT EXISTS `userdata` (
 CREATE TABLE IF NOT EXISTS `dailyquests` (
   `id` int(11) NOT NULL,
   `questID` int(11) NOT NULL,
-  `expire` int(11) NOT NULL DEFAULT NOW() COMMENT "The timestamp that the quest will expire. This should theoretically be the same for all quests, I just don't know where else to store it",
+  `expire` timestamp NOT NULL DEFAULT NOW() COMMENT "The timestamp that the quest will expire. This should theoretically be the same for all quests, I just don't know where else to store it",
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Only used for daily quests, otherwise this is unused';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Only used for Daily Quests, otherwise this is unused';
 
 /* This is absolutely required because otherwise quests will not update properly */
+/* ??? qhar -rya */
 INSERT INTO `dailyquests` (`id`, `questID`) VALUES
 (1, 1),
 (2, 2),
@@ -147,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `friendrequests` (
   `sender` int(11) NOT NULL DEFAULT 0,
   `recipient` int(11) NOT NULL DEFAULT 0,
   `comment` varchar(255) NOT NULL DEFAULT '',
-  `date` int(12) NOT NULL DEFAULT NOW(),
+  `date` timestamp NOT NULL DEFAULT NOW(),
   `new` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='All friend requests between users';
@@ -164,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sender` int(11) NOT NULL DEFAULT 0,
   `recipient` int(11) NOT NULL DEFAULT 0,
-  `date` int(12) NOT NULL DEFAULT NOW(),
+  `date` timestamp NOT NULL DEFAULT NOW(),
   `body` varchar(255) NOT NULL DEFAULT '',
   `subject` varchar(255) NOT NULL DEFAULT '',
   `new` tinyint(1) NOT NULL DEFAULT 1,
@@ -181,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `blocks` (
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
 
-  `name` varchar(255) NOT NULL UNIQUE COMMENT "The Name of the Role",
+  `name` varchar(255) NOT NULL UNIQUE COMMENT "The name of the Role",
 
   `rate` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Star Rating",
   `feature` tinyint(1) NOT NULL DEFAULT 0,
@@ -201,10 +202,10 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `changeSong` tinyint(1) NOT NULL DEFAULT 0,
   `deleteComment` tinyint(1) NOT NULL DEFAULT 0,
 
-  `makePublic` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Un-unlist a level",
+  `makePublic` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Re-list a level",
   `makeUnlisted` tinyint(1) NOT NULL DEFAULT 0,
   
-  `suggestRating` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Add a Rating to the Suggest List",
+  `suggestRating` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Add a Rating to the Suggestion List",
 
   `requestMod` tinyint(1) NOT NULL DEFAULT 0,
   `leaderboardBan` tinyint(1) NOT NULL DEFAULT 0,
@@ -213,9 +214,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
   `modPanel` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Access to the Dashboard Mod Panel",
 
-  `commentColourR` int(11) NOT NULL DEFAULT 255 COMMENT "Red value of the comment colour",
-  `commentColourG` int(11) NOT NULL DEFAULT 255 COMMENT "Green value of the comment colour",
-  `commentColourB` int(11) NOT NULL DEFAULT 255 COMMENT "Blue value of the comment colour",
+  `commentColor` int(11) NOT NULL DEFAULT 255 COMMENT "Comment Color in Hexadecimal",
   `modBadge` tinyint(1) NOT NULL DEFAULT 0 COMMENT "0 - None, 1 - Mod, 2 - Elder Mod",
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -243,9 +242,7 @@ INSERT INTO `roles` (
   `createMapPack`,
   `createQuest`,
   `modPanel`,
-  `commentColourR`,
-  `commentColourG`,
-  `commentColourB`,
+  `commentColor`,
   `modBadge`
 ) VALUES
 (
@@ -271,9 +268,7 @@ INSERT INTO `roles` (
   0,
   0,
   1,
-  200,
-  255,
-  200,
+  'C8FFC8'
   1
 ),
 (
@@ -299,9 +294,7 @@ INSERT INTO `roles` (
   0,
   0,
   1,
-  75,
-  255,
-  75,
+  '4BFF4B',
   2
 ),
 (
@@ -327,9 +320,7 @@ INSERT INTO `roles` (
   1,
   1,
   1,
-  50,
-  255,
-  255,
+  '32FFFF',
   2
 );
 
