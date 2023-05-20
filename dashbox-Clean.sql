@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `userdata` (
 CREATE TABLE IF NOT EXISTS `dailyquests` (
   `id` int(11) NOT NULL,
   `questID` int(11) NOT NULL,
-  `expire` timestamp NOT NULL DEFAULT NOW() COMMENT "The timestamp that the quest will expire. This should theoretically be the same for all quests, I just don't know where else to store it",
+  `expire` int(11) NOT NULL DEFAULT 0 COMMENT "The timestamp that the quest will expire. This should theoretically be the same for all quests, I just don't know where else to store it",
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Only used for Daily Quests, otherwise this is unused';
 
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `friendrequests` (
   `sender` int(11) NOT NULL DEFAULT 0,
   `recipient` int(11) NOT NULL DEFAULT 0,
   `comment` varchar(255) NOT NULL DEFAULT '',
-  `date` timestamp NOT NULL DEFAULT NOW(),
+  `date` int(11) NOT NULL DEFAULT 0,
   `new` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='All friend requests between users';
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sender` int(11) NOT NULL DEFAULT 0,
   `recipient` int(11) NOT NULL DEFAULT 0,
-  `date` timestamp NOT NULL DEFAULT NOW(),
+  `date` int(11) NOT NULL DEFAULT 0,
   `body` varchar(255) NOT NULL DEFAULT '',
   `subject` varchar(255) NOT NULL DEFAULT '',
   `new` tinyint(1) NOT NULL DEFAULT 1,
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
   `modPanel` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Access to the Dashboard Mod Panel",
 
-  `commentColor` int(11) NOT NULL DEFAULT 255 COMMENT "Comment Color in Hexadecimal",
+  `commentColor` varChar(6) NOT NULL DEFAULT 'FFFFFF' COMMENT "Comment Color in Hexadecimal",
   `modBadge` tinyint(1) NOT NULL DEFAULT 0 COMMENT "0 - None, 1 - Mod, 2 - Elder Mod",
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
