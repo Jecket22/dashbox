@@ -99,8 +99,8 @@ CREATE TABLE IF NOT EXISTS `userdata` (
   `glow` int(11) NOT NULL DEFAULT 0,
   `explosion` int(11) NOT NULL DEFAULT 0,
   `trail` int(11) NOT NULL DEFAULT 0,
-  `color1` int(11) NOT NULL DEFAULT 0,
-  `color2` int(11) NOT NULL DEFAULT 3,
+  `colour1` int(11) NOT NULL DEFAULT 0,
+  `colour2` int(11) NOT NULL DEFAULT 3,
 
   `messages` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Only Friends, 2 - Nobody',
   `friendRequests` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - All, 1 - Nobody',
@@ -214,7 +214,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
   `modPanel` tinyint(1) NOT NULL DEFAULT 0 COMMENT "Access to the Dashboard Mod Panel",
 
-  `commentColor` varChar(6) NOT NULL DEFAULT 'FFFFFF' COMMENT "Comment Color in Hexadecimal",
+  `commentColourR` tinyint(4) UNSIGNED NOT NULL DEFAULT 255 COMMENT "Red Colour 0-255",
+  `commentColourG` tinyint(4) UNSIGNED NOT NULL DEFAULT 255 COMMENT "Green Colour 0-255",
+  `commentColourB` tinyint(4) UNSIGNED NOT NULL DEFAULT 255 COMMENT "Blue Colour 0-255",
   `modBadge` tinyint(1) NOT NULL DEFAULT 0 COMMENT "0 - None, 1 - Mod, 2 - Elder Mod",
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -242,7 +244,9 @@ INSERT INTO `roles` (
   `createMapPack`,
   `createQuest`,
   `modPanel`,
-  `commentColor`,
+  `commentColorR`,
+  `commentColorG`,
+  `commentColorB`,
   `modBadge`
 ) VALUES
 (
@@ -268,7 +272,9 @@ INSERT INTO `roles` (
   0,
   0,
   1,
-  'C8FFC8',
+  200,
+  255,
+  200,
   1
 ),
 (
@@ -294,7 +300,9 @@ INSERT INTO `roles` (
   0,
   0,
   1,
-  '4BFF4B',
+  75,
+  255,
+  75,
   2
 ),
 (
@@ -320,7 +328,9 @@ INSERT INTO `roles` (
   1,
   1,
   1,
-  '32FFFF',
+  50,
+  255,
+  255,
   2
 );
 
