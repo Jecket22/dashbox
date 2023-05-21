@@ -37,20 +37,13 @@ $isFriend = $db->prepare("SELECT count(*) FROM friends WHERE user = :user AND fr
 $isFriend->execute([':user' => $_POST['accountID'], ':friend' => $_POST['targetAccountID']]);
 if ($isFriend->fetchColumn() > 0) $friendStatus = 1;
 
-$query = $db->prepare("
-    (SELECT '3' as type FROM friendrequests 
-        WHERE sender = :sender AND recipient = :recipient LIMIT 1
-    )
-    UNION ALL
-    (SELECT '4' as type FROM friendrequests 
-    WHERE sender = :recipient AND recipient = :sender LIMIT 1
-    )
-");
+$outgoingFriend = $db->prepare("SELECT count(*) FROM friendrequests WHERE sender = :sender AND recipient = :recipient");
+$outgoingFriend->execute([':sender' => $_POST['accountID'], ':recipient' => $_POST['targetAccountID']]);
+if ($outgoingFriend->fetchColumn() > 0) $friendStatus = 3;
 
-$query->execute([':sender' => $_POST['accountID'], ':recipient' => $_POST['targetAccountID']]);
-
-$row = $query->fetch(PDO::FETCH_ASSOC);
-$friendStatus = int($row['type']);
+$incomingFriend = $db->prepare("SELECT count(*) FROM friendrequests WHERE sender = :sender AND recipient = :recipient");
+$incomingFriend->execute([':sender' => $_POST['targetAccountID'], ':recipient' => $_POST['accountID']]);
+if ($incomingFriend->fetchColumn() > 0) $friendStatus = 4;
 
 if ($user['stars'] <= 0) $rank = 0;
 
@@ -67,8 +60,8 @@ echo '1:'  . $user['userName'];
 echo ':2:'  . $user['id'];
 echo ':13:' . $user['starCoins'];
 echo ':17:' . $user['userCoins'];
-echo ':10:' . $user['color1'];
-echo ':11:' . $user['color2'];
+echo ':10:' . $user['colour1'];
+echo ':11:' . $user['colour2'];
 echo ':3:'  . $user['stars'];
 echo ':46:' . $user['diamonds'];
 echo ':4:'  . $user['demons'];

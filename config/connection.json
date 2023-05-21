@@ -1,0 +1,7 @@
+{
+    "server": "localhost",
+    "port": "3306",
+    "user": "superuser",
+    "password": "s4mpel_p@55w0rd",
+    "database": "dashbox"
+}
