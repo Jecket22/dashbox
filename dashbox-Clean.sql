@@ -268,7 +268,7 @@ INSERT INTO `roles` (
   0,
   0,
   1,
-  'C8FFC8'
+  'C8FFC8',
   1
 ),
 (
